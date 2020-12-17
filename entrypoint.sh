@@ -29,6 +29,6 @@ if [ "$USE_LEVANT" = "true" ]; then
 else
   curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - && \
     apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" && \
-    apt-get update && apt-get install nomad
+    apt-get update && apt-get install -y nomad
   nomad $NOMAD_ARGS
 fi
