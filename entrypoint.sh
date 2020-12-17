@@ -27,8 +27,8 @@ if [ "$USE_LEVANT" = "true" ]; then
     chmod +x ./levant
   ./levant deploy -address="$NOMAD_ADDR" $LEVANT_OPTS "$NOMAD_JOB"
 else
-  curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
-    sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" && \
-    sudo apt-get update && sudo apt-get install nomad
-  sed "s/\[\[\.version\]\]/$DOCKER_TAG/" "$GITHUB_WORKSPACE/$NOMAD_JOB" | nomad job run -hcl1 -
+  curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - && \
+    apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" && \
+    apt-get update && sudo apt-get install nomad
+  nomad $NOMAD_ARGS
 fi
