@@ -25,7 +25,7 @@ if [ "$USE_LEVANT" = "true" ]; then
   LEVANT_VERSION="${LEVANT_VERSION:-0.2.8}"
   curl -L https://github.com/hashicorp/levant/releases/download/"$LEVANT_VERSION"/linux-amd64-levant -o levant && \
     chmod +x ./levant
-  ./levant deploy -ignore-no-changes -address="$NOMAD_ADDR" -canary-auto-promote="$LEVANT_PROMOTE_TIME" -var version="$DOCKER_TAG" "$NOMAD_JOB"
+  ./levant deploy -address="$NOMAD_ADDR" $LEVANT_OPTS "$NOMAD_JOB"
 else
   curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
     sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" && \
